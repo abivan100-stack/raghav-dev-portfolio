@@ -4,7 +4,7 @@ import { Section } from "./ui";
 export function Timeline() {
   return (
     <Section id="timeline" title={SECTION_COPY.timeline.title}>
-      <ol className="timeline">
+      <ol className="timeline scoreboard">
         {TIMELINE.map((item, index) => (
           <li
             key={item.title}

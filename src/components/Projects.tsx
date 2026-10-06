@@ -34,9 +34,11 @@ export function ProjectList() {
   const copy = SECTION_COPY.projectsPage;
   return (
     <section className="page" id="projects" aria-labelledby="projects-title">
-      <div className="container">
+      <div className="container lane-pad">
         <header className="page-head">
-          <h1 id="projects-title">{copy.title}</h1>
+          <h1 id="projects-title" data-start>
+            {copy.title}
+          </h1>
           <p className="page-lead">{copy.lead}</p>
         </header>
         {PROJECTS.map((project) => (

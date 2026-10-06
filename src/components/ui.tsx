@@ -11,17 +11,18 @@ interface SectionProps {
 }
 
 /**
- * Page section: the heading is a trace that ends in a pad, followed by an
+ * Page section: the heading sits at a station on the tape, followed by an
  * optional one-line lead and the body.
  */
 export function Section({ id, title, lead, children }: SectionProps) {
   const headingId = `${id}-title`;
   return (
     <section className="section" id={id} aria-labelledby={headingId}>
-      <div className="container">
+      <div className="container lane-pad">
         <header className="section-head">
-          <h2 id={headingId}>{title}</h2>
-          <span className="trace" aria-hidden="true" />
+          <h2 id={headingId} data-station>
+            {title}
+          </h2>
         </header>
         {lead ? <p className="section-lead">{lead}</p> : null}
         <div className="section-body">{children}</div>

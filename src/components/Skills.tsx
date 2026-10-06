@@ -4,12 +4,12 @@ import { Section } from "./ui";
 export function Skills() {
   return (
     <Section id="technologies" title={SECTION_COPY.stack.title}>
-      <dl className="stack">
+      <dl className="drawers">
         {STACK_ROWS.map((row) => (
-          <div className="stack-row" key={row.label}>
+          <div className="drawer" key={row.label}>
             <dt>{row.label}</dt>
             <dd>
-              <ul className="pins">
+              <ul className="bins">
                 {row.items.map((item) => (
                   <li key={item}>{item}</li>
                 ))}

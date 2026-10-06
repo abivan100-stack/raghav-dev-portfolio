@@ -42,6 +42,7 @@ export function ProjectCard({ project }: { project: Project }) {
     <article
       className={project.featured ? "entry entry-featured" : "entry"}
       id={project.slug}
+      data-station="top"
       aria-labelledby={`${project.slug}-name`}
     >
       <header className="entry-head">

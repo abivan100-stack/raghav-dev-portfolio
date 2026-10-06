@@ -83,10 +83,11 @@ export function Navbar() {
           onClick={home ? scrollToTop : undefined}
         >
           <svg className="brand-mark" viewBox="0 0 100 100" width="28" height="28" aria-hidden="true" focusable="false">
-            <rect className="mark-board" width="100" height="100" rx="20" />
-            <rect className="mark-pad" x="16" y="36" width="24" height="28" rx="4" />
-            <rect className="mark-pad" x="60" y="36" width="24" height="28" rx="4" />
-            <path className="mark-trace" d="M40 50h20" />
+            <rect className="mark-board" width="100" height="100" rx="22" />
+            <path className="mark-trace" d="M50 -4V30Q50 50 50 62" />
+            <rect className="mark-pad" x="30" y="38" width="40" height="52" rx="12" />
+            <circle className="mark-led" cx="40" cy="74" r="5" />
+            <circle className="mark-led" cx="60" cy="74" r="5" />
           </svg>
           <span className="brand-text">{PROFILE_NAME}</span>
         </a>

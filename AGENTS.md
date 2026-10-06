@@ -21,18 +21,19 @@ Vite + React 19 + strict TypeScript portfolio with two pages: home (`index.html`
 ## Motion (one language)
 
 - All timing lives in `src/lib/motion.ts`: one ease, 8px rise, 50ms stagger. Components import it rather than hardcoding durations.
-- One orchestrated moment: the hero entrance (name, copy, hinge sketch). Sections are static and readable on arrival.
-- Interaction motion (mobile menu, button press, the hinge sketch, project-row hover fill) answers the user's action. Transform/opacity only, calm easing.
+- One orchestrated moment: the hero entrance (name, statement, actions, facts). Sections are static and readable on arrival.
+- The arena robot (`components/Track.tsx`) answers the scroll: it eases toward the scroll position with `ROBOT_FOLLOW`, writes its `transform` straight to the SVG (no React state per frame), and stops its rAF loop once it settles. Under reduced motion it parks at the start and every station is lit.
+- Interaction motion (mobile menu, button press, project-row zone swipe) answers the user's action. Transform/opacity only, calm easing.
 - `SiteShell` wraps every page in `LazyMotion features={domAnimation} strict` and `MotionConfig reducedMotion="user"`. Animate with `m.*` from `motion/react-m`; a `motion.*` component throws under `strict` and pulls the full bundle back in.
 - Under reduced motion, `MotionConfig` drops transforms but keeps opacity fades; the CSS query covers the rest.
 
 ## Design system
 
-- A circuit board you can poke: tokens on `:root` in `src/index.css`. The sheet (`--page`, `--ink`, `--ink-2/3`, `--rule`, `--pad`, `--win`) flips light/dark via `prefers-color-scheme`; the board tokens (`--board`, `--board-2/3`, `--silk`, `--gold`, `--laser`) stay the same in both themes. Text contrast stays at WCAG AA.
-- Boards (`.board`, cobalt solder mask with mounting holes) are the hero and the contact block. Gold means a pad, a link or an achieved result. Laser red appears only on the hinge beam.
-- One family: Bricolage Grotesque (Google Fonts, `opsz` + `wdth` + `wght`). Display type is condensed (`font-stretch: 75%`) and heavy; body stays at regular width. Sentence case, no caps labels, no mono.
-- Sections use `Section` (`components/ui.tsx`): the heading is a trace ending in a pad, heading text matching its nav label. Facts go in `dl.spec` rows.
-- The hero's one bold element is `HingeScene`: a sketch of the Door Hinge Safety System. A fingertip follows the pointer; cutting the laser or IR beam lights Sense, Process, Actuate. The button is the keyboard and touch path. It is a sketch, so keep it free of invented numbers or timings. The full signal chain also lives on the Door Hinge entry.
+- The arena: the page is a robotics arena floor. Tokens on `:root` in `src/index.css`: `--floor` (faint mat grid), `--ink` (black tape; white on the dark floor), `--yellow` (zones, results, the robot), `--red` (the robot's LED only). `--panel` stays black in both themes for the scoreboard. Text contrast stays at WCAG AA.
+- Two families. Anybody, set extra-wide (`font-stretch` 130 to 150%) and black, is the paint on the floor: names, headings, the headline result. Instrument Sans does the reading. Sentence case, no caps labels, no mono.
+- The tape lane: `.lane-pad` keeps content right of the tape. `Track` draws a serpentine tape from `[data-start]` to `[data-finish]` (hero start box or projects `h1`, footer finish line) with a station at each `[data-station]` heading. Elements that stick (project entries) use `data-station="top"` so scrolling cannot move their station. New pages need one `data-start` and the shared footer.
+- Sections use `Section` (`components/ui.tsx`): heading at a station, heading text matching its nav label. Facts go in `dl.spec` rows. Competitions is the black scoreboard; Stack is a parts organiser (`.drawers`).
+- The robot is decoration: keep it free of copy, labels or claims, and hidden from assistive tech.
 - Each result appears once on the home page, in Competitions. The home project index shows name + `summary`.
 
 ## Components

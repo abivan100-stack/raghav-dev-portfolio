@@ -18,10 +18,11 @@ actuators, and write the software that ties it together.
 
 ## What's inside
 
-The site is designed as **a circuit board you can poke**: the name in silkscreen
-type on a cobalt board, and a sketch of the Door Hinge Safety System that reacts
-to your pointer. Move a fingertip into the hinge gap, cut the laser and IR
-beams, and watch the Sense, Process and Actuate stages light up.
+The site is designed as **a robotics arena floor**: a strip of black tape runs
+down the page with a station at every heading, and a small line-following robot
+rides it as you scroll, from the start box under the name to the chequered
+finish line at the bottom. Competitions is a black scoreboard, the stack is a
+parts organiser, and project names are painted on the floor in extra-wide type.
 
 | Project | What it is | Links |
 | --- | --- | --- |
@@ -37,9 +38,9 @@ the [projects page](https://raghavkrishna-dev.vercel.app/project).
 
 ## Highlights
 
-- **One typeface, two colours.** Bricolage Grotesque's width axis carries the
-  display type; gold marks pads, links and results, and laser red appears only
-  on the hinge beam.
+- **Two typefaces, one colour.** Anybody, set extra-wide, is the paint on the
+  floor; Instrument Sans does the reading. Hi-vis yellow marks zones and
+  results, and the robot's red LED appears nowhere else.
 - **Light and dark themes** that follow the operating system, with text at
   WCAG AA contrast in both.
 - **Calm motion.** One entrance on load, then the page stays still. Reduced
@@ -100,7 +101,8 @@ browser console is clean, and the page has been checked on desktop and a
     ├── pages/ProjectPage.tsx   # Projects page
     ├── components/
     │   ├── SiteShell.tsx       # Shared frame: skip link, nav, footer, motion setup
-    │   ├── Hero.tsx            # Name, statement, facts, hinge sketch
+    │   ├── Track.tsx           # Tape, stations and the scroll-riding robot
+    │   ├── Hero.tsx            # Start box, name, statement, facts
     │   ├── Projects.tsx        # Home project index and projects page list
     │   ├── ProjectCard.tsx     # One project as a spec entry
     │   ├── Contributions.tsx   # GitHub contribution calendar

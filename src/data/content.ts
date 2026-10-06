@@ -32,21 +32,10 @@ export const HERO_COPY = {
   projectsLink: "View projects",
 } as const;
 
-/** Hero sketch of the Door Hinge Safety System reacting to a hand in the gap. */
-export const HINGE_COPY = {
-  sceneLabel:
-    "Top view of a door hinge. A laser beam and an IR beam cross the gap between the door and the frame.",
-  door: "Door",
-  frame: "Frame",
-  zone: "Danger zone",
-  laser: "Laser",
-  ir: "IR sensor",
-  idle: "Watching the hinge gap.",
-  tripped: "Hand detected. The servo and solenoid respond.",
-  hint: "Move your pointer into the gap, or use the button.",
-  trigger: "Put a hand in the gap",
-  caption: "A sketch of how the Door Hinge Safety System reacts, not a measured demo.",
-  more: "Read the full write-up",
+/** The arena floor: a decorative robot rides the tape as the page scrolls. */
+export const ARENA_COPY = {
+  start: "Start",
+  hint: "Scroll and the robot follows the tape.",
 } as const;
 
 /** Hero facts: school, city and age. */
