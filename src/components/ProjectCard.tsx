@@ -32,8 +32,8 @@ function TechLine({ items }: { items: TechMention[] }) {
 }
 
 /**
- * One project as a datasheet entry: name and result in the margin
- * column, description and spec rows in the body. The featured project
+ * One project as a spec entry: name and result in the left column,
+ * description and spec rows in the body. The featured project
  * shows its signal chain as staged blocks above the spec.
  */
 export function ProjectCard({ project }: { project: Project }) {

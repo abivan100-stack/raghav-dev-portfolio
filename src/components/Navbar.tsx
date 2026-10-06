@@ -82,6 +82,12 @@ export function Navbar() {
           aria-label={`${PROFILE_NAME} home`}
           onClick={home ? scrollToTop : undefined}
         >
+          <svg className="brand-mark" viewBox="0 0 100 100" width="28" height="28" aria-hidden="true" focusable="false">
+            <rect className="mark-board" width="100" height="100" rx="20" />
+            <rect className="mark-pad" x="16" y="36" width="24" height="28" rx="4" />
+            <rect className="mark-pad" x="60" y="36" width="24" height="28" rx="4" />
+            <path className="mark-trace" d="M40 50h20" />
+          </svg>
           <span className="brand-text">{PROFILE_NAME}</span>
         </a>
         <nav className="nav-links" aria-label="Primary">

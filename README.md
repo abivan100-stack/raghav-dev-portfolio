@@ -18,9 +18,10 @@ actuators, and write the software that ties it together.
 
 ## What's inside
 
-The site is designed as a **builder's datasheet on drafting paper**: the name
-set as the sheet title, facts in a drafting title block, and every project
-written up like a component spec.
+The site is designed as **a circuit board you can poke**: the name in silkscreen
+type on a cobalt board, and a sketch of the Door Hinge Safety System that reacts
+to your pointer. Move a fingertip into the hinge gap, cut the laser and IR
+beams, and watch the Sense, Process and Actuate stages light up.
 
 | Project | What it is | Links |
 | --- | --- | --- |
@@ -36,8 +37,9 @@ the [projects page](https://raghavkrishna-dev.vercel.app/project).
 
 ## Highlights
 
-- **One typeface, one accent.** Archivo's width axis carries the display type;
-  a single PCB green marks what is connected or achieved.
+- **One typeface, two colours.** Bricolage Grotesque's width axis carries the
+  display type; gold marks pads, links and results, and laser red appears only
+  on the hinge beam.
 - **Light and dark themes** that follow the operating system, with text at
   WCAG AA contrast in both.
 - **Calm motion.** One entrance on load, then the page stays still. Reduced
@@ -98,9 +100,9 @@ browser console is clean, and the page has been checked on desktop and a
     ├── pages/ProjectPage.tsx   # Projects page
     ├── components/
     │   ├── SiteShell.tsx       # Shared frame: skip link, nav, footer, motion setup
-    │   ├── Hero.tsx            # Name, statement, drafting title block
+    │   ├── Hero.tsx            # Name, statement, facts, hinge sketch
     │   ├── Projects.tsx        # Home project index and projects page list
-    │   ├── ProjectCard.tsx     # One project as a datasheet entry
+    │   ├── ProjectCard.tsx     # One project as a spec entry
     │   ├── Contributions.tsx   # GitHub contribution calendar
     │   ├── ui.tsx              # Section layout, Tip tooltip, brand icons
     │   └── ...                 # About, Timeline, Skills, Contact, Navbar, Footer

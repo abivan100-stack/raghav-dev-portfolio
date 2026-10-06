@@ -17,6 +17,7 @@ export function ProjectIndex() {
             <a href={`${PROJECTS_PAGE_PATH}#${project.slug}`}>
               <span className="index-name">{project.name}</span>
               <span className="index-summary">{project.summary}</span>
+              <span className="index-pad" aria-hidden="true" />
             </a>
           </li>
         ))}
@@ -28,7 +29,7 @@ export function ProjectIndex() {
   );
 }
 
-/** Projects page: page title, then every project as a datasheet entry. */
+/** Projects page: page title, then every project as a spec entry. */
 export function ProjectList() {
   const copy = SECTION_COPY.projectsPage;
   return (

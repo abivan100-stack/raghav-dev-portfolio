@@ -21,18 +21,18 @@ Vite + React 19 + strict TypeScript portfolio with two pages: home (`index.html`
 ## Motion (one language)
 
 - All timing lives in `src/lib/motion.ts`: one ease, 8px rise, 50ms stagger. Components import it rather than hardcoding durations.
-- One orchestrated moment: the hero entrance (name, statement, actions, title block). Sections are static and readable on arrival.
-- Interaction motion (mobile menu, button press) answers the user's action. Transform/opacity only, calm easing.
+- One orchestrated moment: the hero entrance (name, copy, hinge sketch). Sections are static and readable on arrival.
+- Interaction motion (mobile menu, button press, the hinge sketch, project-row hover fill) answers the user's action. Transform/opacity only, calm easing.
 - `SiteShell` wraps every page in `LazyMotion features={domAnimation} strict` and `MotionConfig reducedMotion="user"`. Animate with `m.*` from `motion/react-m`; a `motion.*` component throws under `strict` and pulls the full bundle back in.
 - Under reduced motion, `MotionConfig` drops transforms but keeps opacity fades; the CSS query covers the rest.
 
 ## Design system
 
-- Datasheet on drafting paper: tokens on `:root` in `src/index.css` (paper, ink, ink-2/3, rule, `--frame`, one PCB-green `--trace`), dark variant via `prefers-color-scheme`. Text contrast stays at WCAG AA.
-- One family: Archivo (Google Fonts, `wdth` + `wght` axes). Display type uses `font-stretch`; labels are sentence case in the same face.
-- Sections use `Section` (`components/ui.tsx`): heading in the margin column, body on the right, heading text matching its nav label. Facts go in `dl.spec` rows.
-- Green means connected or achieved: traces, links, awarded/qualified results.
-- The hero is type only: the name, one statement, and a drafting title block (square, ruled) for the facts. The real signal chain lives on the Door Hinge entry.
+- A circuit board you can poke: tokens on `:root` in `src/index.css`. The sheet (`--page`, `--ink`, `--ink-2/3`, `--rule`, `--pad`, `--win`) flips light/dark via `prefers-color-scheme`; the board tokens (`--board`, `--board-2/3`, `--silk`, `--gold`, `--laser`) stay the same in both themes. Text contrast stays at WCAG AA.
+- Boards (`.board`, cobalt solder mask with mounting holes) are the hero and the contact block. Gold means a pad, a link or an achieved result. Laser red appears only on the hinge beam.
+- One family: Bricolage Grotesque (Google Fonts, `opsz` + `wdth` + `wght`). Display type is condensed (`font-stretch: 75%`) and heavy; body stays at regular width. Sentence case, no caps labels, no mono.
+- Sections use `Section` (`components/ui.tsx`): the heading is a trace ending in a pad, heading text matching its nav label. Facts go in `dl.spec` rows.
+- The hero's one bold element is `HingeScene`: a sketch of the Door Hinge Safety System. A fingertip follows the pointer; cutting the laser or IR beam lights Sense, Process, Actuate. The button is the keyboard and touch path. It is a sketch, so keep it free of invented numbers or timings. The full signal chain also lives on the Door Hinge entry.
 - Each result appears once on the home page, in Competitions. The home project index shows name + `summary`.
 
 ## Components

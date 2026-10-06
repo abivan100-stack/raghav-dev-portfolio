@@ -5,8 +5,11 @@ export function Timeline() {
   return (
     <Section id="timeline" title={SECTION_COPY.timeline.title}>
       <ol className="timeline">
-        {TIMELINE.map((item) => (
-          <li key={item.title} className={item.minor ? "tl-minor" : undefined}>
+        {TIMELINE.map((item, index) => (
+          <li
+            key={item.title}
+            className={["tl-item", item.minor ? "tl-minor" : "", index === 0 ? "tl-top" : ""].filter(Boolean).join(" ")}
+          >
             <span className="tl-year">{item.year}</span>
             <div>
               <p className="tl-title">{item.title}</p>

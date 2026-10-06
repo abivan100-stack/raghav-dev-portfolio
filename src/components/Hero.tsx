@@ -10,6 +10,7 @@ import {
 } from "../data/content";
 import { getContributions } from "../lib/contributions";
 import { EASE, entrance, PRESS_DURATION } from "../lib/motion";
+import { HingeScene } from "./HingeScene";
 
 const hideOnError: ReactEventHandler<HTMLImageElement> = (event) => {
   event.currentTarget.style.display = "none";
@@ -18,8 +19,8 @@ const hideOnError: ReactEventHandler<HTMLImageElement> = (event) => {
 const press = { whileTap: { scale: 0.98 }, transition: { duration: PRESS_DURATION, ease: EASE } };
 
 /**
- * Type-only hero: the name as the sheet title, one plain statement, and a
- * drafting title block holding the facts, set in the corner like on a drawing.
+ * The hero is a circuit board: the name in silkscreen type, a few facts, and
+ * a sketch of the Door Hinge Safety System that reacts to the pointer.
  */
 export function Hero() {
   const [contributionTotal, setContributionTotal] = useState<number | null>(null);
@@ -36,46 +37,51 @@ export function Hero() {
 
   return (
     <section className="hero" id="intro" aria-labelledby="hero-name">
-      <div className="container hero-grid">
-        <m.h1 {...entrance(0)} className="hero-name" id="hero-name">
-          {HERO_COPY.name}
-        </m.h1>
-        <div className="hero-copy">
-          <m.p {...entrance(1)} className="hero-statement">
-            {HERO_COPY.statement}
-          </m.p>
-          <m.div {...entrance(2)} className="hero-actions">
-            <m.a className="btn btn-primary" href={PROJECTS_PAGE_PATH} {...press}>
-              {HERO_COPY.projectsLink}
-            </m.a>
-            {contributionTotal !== null ? (
-              <a className="hero-teaser" href="#contributions">
-                <span className="hero-teaser-count">{contributionTotal.toLocaleString()}</span>{" "}
-                {CONTRIBUTION_TEASER.lead}
-              </a>
-            ) : null}
-          </m.div>
-        </div>
-        <m.div {...entrance(3)} className="title-block">
-          {/* PROFILE PHOTO: swap src for assets/profile.jpg to use a real photograph. */}
-          <img
-            className="profile-img"
-            src={GITHUB_AVATAR_URL}
-            alt={HERO_COPY.avatarAlt}
-            width={96}
-            height={96}
-            decoding="async"
-            onError={hideOnError}
-          />
-          <dl className="title-block-facts">
-            {TITLE_BLOCK.map((fact) => (
-              <div key={fact.label}>
-                <dt>{fact.label}</dt>
-                <dd>{fact.value}</dd>
+      <div className="container">
+        <div className="board hero-board">
+          <m.h1 {...entrance(0)} className="hero-name" id="hero-name">
+            {HERO_COPY.name}
+          </m.h1>
+          <div className="hero-grid">
+            <m.div {...entrance(1)} className="hero-copy">
+              <p className="hero-statement">{HERO_COPY.statement}</p>
+              <div className="hero-person">
+                {/* PROFILE PHOTO: swap src for assets/profile.jpg to use a real photograph. */}
+                <img
+                  className="profile-img"
+                  src={GITHUB_AVATAR_URL}
+                  alt={HERO_COPY.avatarAlt}
+                  width={64}
+                  height={64}
+                  decoding="async"
+                  onError={hideOnError}
+                />
+                <dl className="hero-facts">
+                  {TITLE_BLOCK.map((fact) => (
+                    <div key={fact.label}>
+                      <dt>{fact.label}</dt>
+                      <dd>{fact.value}</dd>
+                    </div>
+                  ))}
+                </dl>
               </div>
-            ))}
-          </dl>
-        </m.div>
+              <div className="hero-actions">
+                <m.a className="btn btn-gold" href={PROJECTS_PAGE_PATH} {...press}>
+                  {HERO_COPY.projectsLink}
+                </m.a>
+                {contributionTotal !== null ? (
+                  <a className="hero-teaser" href="#contributions">
+                    <span className="hero-teaser-count">{contributionTotal.toLocaleString()}</span>{" "}
+                    {CONTRIBUTION_TEASER.lead}
+                  </a>
+                ) : null}
+              </div>
+            </m.div>
+            <m.div {...entrance(2)} className="hero-scene">
+              <HingeScene />
+            </m.div>
+          </div>
+        </div>
       </div>
     </section>
   );

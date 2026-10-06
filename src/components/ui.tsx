@@ -1,5 +1,5 @@
 // Shared primitives: section shell, tooltip gloss, brand icons.
-// Watermelon UI's Tooltip and Button are ported natively in index.css.
+// The tooltip and button styles live in index.css.
 import type { ReactNode } from "react";
 import { useId } from "react";
 
@@ -11,22 +11,19 @@ interface SectionProps {
 }
 
 /**
- * Datasheet section: the heading sits in the margin column on wide
- * screens and stacks above the body on narrow ones.
+ * Page section: the heading is a trace that ends in a pad, followed by an
+ * optional one-line lead and the body.
  */
 export function Section({ id, title, lead, children }: SectionProps) {
   const headingId = `${id}-title`;
   return (
-    <section
-      className="section"
-      id={id}
-      aria-labelledby={headingId}
-    >
-      <div className="container section-grid">
+    <section className="section" id={id} aria-labelledby={headingId}>
+      <div className="container">
         <header className="section-head">
           <h2 id={headingId}>{title}</h2>
-          {lead ? <p className="section-lead">{lead}</p> : null}
+          <span className="trace" aria-hidden="true" />
         </header>
+        {lead ? <p className="section-lead">{lead}</p> : null}
         <div className="section-body">{children}</div>
       </div>
     </section>
