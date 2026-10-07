@@ -12,8 +12,8 @@ export const EASE: [number, number, number, number] = [0.22, 1, 0.36, 1];
 export const RISE_PX = 8;
 export const INTERACTION_DURATION = 0.25;
 export const PRESS_DURATION = 0.12;
-/** The arena robot closes this share of the gap to the scroll position each frame. */
-export const ROBOT_FOLLOW = 0.14;
+/** Spring stiffness (1/s²) of the arena robot following the scroll; critically damped. */
+export const ROBOT_STIFFNESS = 90;
 
 /** Spread onto a motion element for the hero entrance (plays on mount). */
 export function entrance(index = 0, baseDelay = 0.05) {

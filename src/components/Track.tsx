@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ROBOT_FOLLOW } from "../lib/motion";
+import { ROBOT_STIFFNESS } from "../lib/motion";
 import { useMediaQuery } from "../lib/useMediaQuery";
 
 interface Layout {
@@ -91,15 +91,39 @@ export function Track() {
     };
     let current = targetY();
     let frame = 0;
-    const tick = () => {
-      const gap = targetY() - current;
-      current += gap * ROBOT_FOLLOW;
-      const moving = Math.abs(gap) > 0.6;
-      place(current, moving);
-      frame = moving ? requestAnimationFrame(tick) : 0;
+    let last = 0;
+    let moving = false;
+    let velocity = 0;
+    const tick = (now: number) => {
+      // Critically damped spring, fixed 4 ms sub-steps: smooth, no overshoot,
+      // identical at any refresh rate, and velocity carries across scroll bursts.
+      let remaining = Math.min(now - last, 64) / 1000;
+      last = now;
+      const target = targetY();
+      while (remaining > 0) {
+        const h = Math.min(remaining, 0.004);
+        velocity += (ROBOT_STIFFNESS * (target - current) - 2 * Math.sqrt(ROBOT_STIFFNESS) * velocity) * h;
+        current += velocity * h;
+        remaining -= h;
+      }
+      const gap = Math.abs(target - current);
+      // Hysteresis so the LED does not flicker around the threshold.
+      moving = moving ? gap > 0.6 : gap > 4;
+      if (gap > 0.1 || Math.abs(velocity) > 1) {
+        place(current, moving);
+        frame = requestAnimationFrame(tick);
+      } else {
+        current = target;
+        velocity = 0;
+        place(current, false);
+        frame = 0;
+      }
     };
     const wake = () => {
-      if (!frame) frame = requestAnimationFrame(tick);
+      if (!frame) {
+        last = performance.now();
+        frame = requestAnimationFrame(tick);
+      }
     };
     place(current, false);
     window.addEventListener("scroll", wake, { passive: true });

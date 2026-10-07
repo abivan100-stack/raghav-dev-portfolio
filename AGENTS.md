@@ -26,7 +26,7 @@ Vite + React 19 + strict TypeScript portfolio with two pages: home (`index.html`
 - `SiteShell` wraps every page in `LazyMotion features={domAnimation} strict` and `MotionConfig reducedMotion="user"`. Animate with `m.*` from `motion/react-m`; under `strict` a `motion.*` component throws and pulls the full bundle back in, so keep new motion on `m.*`.
 - Accessibility is the one hard requirement, not a budget item. Anything you animate must respect reduced motion — `MotionConfig` drops transforms while opacity fades remain, and the CSS query covers the rest. Never make motion the only way information is conveyed.
 - Performance is the other one: prefer transform/opacity, and make scroll-linked work cheap (avoid layout thrash and per-frame `setState` on large subtrees).
-- The arena robot (`components/Track.tsx`) answers the scroll: it eases toward the scroll position with `ROBOT_FOLLOW`, writes its `transform` straight to the SVG (no React state per frame), and stops its rAF loop once it settles. Under reduced motion it parks at the start and every station is lit.
+- The arena robot (`components/Track.tsx`) answers the scroll: it eases toward the scroll position with `ROBOT_STIFFNESS` (critically damped spring), writes its `transform` straight to the SVG (no React state per frame), and stops its rAF loop once it settles. Under reduced motion it parks at the start and every station is lit.
 - What ships today is restrained — a hero entrance, action feedback, and sections that are static on arrival. That is the current design, not a rule. Changing it is allowed.
 
 ## Design system

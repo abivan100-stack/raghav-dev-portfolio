@@ -140,11 +140,11 @@ ul, ol { list-style: none; }
 }
 .track-svg { position: absolute; left: var(--gutter); top: 0; overflow: visible; }
 .tape { fill: none; stroke: var(--ink); stroke-width: var(--tape-w); stroke-linecap: round; stroke-linejoin: round; }
-.station { fill: var(--floor); stroke: var(--ink); stroke-width: 5; transition: fill var(--dur) var(--ease); }
+.station { fill: var(--floor); stroke: var(--ink); stroke-width: 5; transition: fill 0.4s ease-out; }
 .station.is-passed { fill: var(--yellow); }
 .bot-body { fill: var(--yellow); stroke: var(--black); stroke-width: 3; }
 .bot-wheel, .bot-chip { fill: var(--black); }
-.bot-led { fill: #5c1313; }
+.bot-led { fill: #5c1313; transition: fill 0.35s ease-out; }
 .robot.is-moving .bot-led { fill: var(--red); }
 
 /* ---------- links + buttons ---------- */
@@ -557,7 +557,7 @@ a.record-build:hover { color: var(--panel-ink); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .tip-bubble, .index-row::before, .closing-link::before, .btn, .station { transition: none; }
+  .tip-bubble, .index-row::before, .closing-link::before, .btn, .station, .bot-led { transition: none; }
 }
 
 /* ---------- responsive ---------- */
