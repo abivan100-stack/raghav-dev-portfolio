@@ -10,7 +10,7 @@ import { Section } from "./ui";
  */
 export function Skills() {
   return (
-    <Section id="technologies" title={SECTION_COPY.stack.title} variant="board">
+    <Section id="technologies" title={SECTION_COPY.stack.title}>
       <div className="kit">
         {STACK_ROWS.map((row) => (
           <div className="kit-group" key={row.label}>

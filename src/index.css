@@ -461,16 +461,12 @@ ul, ol { list-style: none; }
 .contribution-legend .contribution-level-4 { background: var(--cal-4); }
 
 /* ---------- competitions: the scoreboard (a real table) ---------- */
-.record-scroll {
-  padding: 6px 30px 10px;
-  background: var(--panel); color: var(--panel-ink);
-  border: 3px solid var(--ink); border-radius: 16px;
-}
 /* The scoreboard runs off the right edge of the page, the one block that is not column width. */
-.section--record .record-scroll {
+.record-scroll {
   margin-right: calc(-1 * (max(0px, (100vw - var(--max)) / 2) + var(--gutter)));
-  padding-right: calc(var(--gutter) + 8px);
-  border-right: none; border-radius: 16px 0 0 16px;
+  padding: 6px calc(var(--gutter) + 8px) 10px 30px;
+  background: var(--panel); color: var(--panel-ink);
+  border: 3px solid var(--ink); border-right: none; border-radius: 16px 0 0 16px;
 }
 .record-scroll :focus-visible { outline-color: var(--yellow); }
 .record-table { width: 100%; border-collapse: collapse; text-align: left; }
@@ -593,7 +589,7 @@ a.record-build:hover { color: var(--panel-ink); }
    header row stays in the accessibility tree (clipped, never display:none) and
    the table roles are restated in the markup because display drops them. */
 @media (max-width: 48rem) {
-  .record-scroll, .section--record .record-scroll { padding: 6px 18px 8px; margin-right: 0; border-right: 3px solid var(--ink); border-radius: 16px; }
+  .record-scroll { padding: 6px 18px 8px; margin-right: 0; border-right: 3px solid var(--ink); border-radius: 16px; }
   .record-table, .record-table tbody, .record-table tr, .record-table td { display: block; }
   .record-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .record-table tr { padding: 20px 0 22px; border-top: 1px solid var(--panel-rule); }

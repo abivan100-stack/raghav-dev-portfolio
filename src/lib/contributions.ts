@@ -39,18 +39,18 @@ function isContributionCalendar(value: unknown): value is ContributionCalendar {
   return calendar.available === true && calendar.weeks.every(
     (week: unknown) =>
       Array.isArray(week) &&
-      week.every(
-        (day: unknown) =>
-          typeof day === "object" &&
-          day !== null &&
-          typeof (day as Record<string, unknown>).date === "string" &&
+      week.every((day: unknown) => {
+        if (typeof day !== "object" || day === null) return false;
+        const { date, count, level } = day as Record<string, unknown>;
+        return (
           // A malformed date would make Intl.DateTimeFormat throw mid-render.
-          ISO_DAY.test((day as Record<string, unknown>).date as string) &&
-          typeof (day as Record<string, unknown>).count === "number" &&
-          Number.isInteger((day as Record<string, unknown>).count) &&
-          ((day as Record<string, unknown>).count as number) >= 0 &&
-          isContributionLevel((day as Record<string, unknown>).level),
-      ),
+          typeof date === "string" &&
+          ISO_DAY.test(date) &&
+          Number.isInteger(count) &&
+          (count as number) >= 0 &&
+          isContributionLevel(level)
+        );
+      }),
   );
 }
 
@@ -86,8 +86,6 @@ let cached: Promise<ContributionCalendar | null> | null = null;
 
 /** Shared, memoized contribution calendar request. Never rejects. */
 export function getContributions(): Promise<ContributionCalendar | null> {
-  if (!cached) {
-    cached = loadCalendar();
-  }
+  cached ??= loadCalendar();
   return cached;
 }

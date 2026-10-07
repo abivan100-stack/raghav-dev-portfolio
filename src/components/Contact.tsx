@@ -9,7 +9,7 @@ import { LinkIcon, Section } from "./ui";
 export function Contact() {
   const copy = SECTION_COPY.contact;
   return (
-    <Section id="contact" title={copy.title} lead={copy.lead} variant="closing">
+    <Section id="contact" title={copy.title} lead={copy.lead}>
       <ul className="closing-list">
         {CONTACT_ITEMS.map((item) => (
           <li className="closing-item" key={item.label}>

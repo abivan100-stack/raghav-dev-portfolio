@@ -11,7 +11,7 @@ export function About() {
   const copy = SECTION_COPY.about;
   const now = SECTION_COPY.currently;
   return (
-    <Section id="about" title={copy.title} variant="prose">
+    <Section id="about" title={copy.title}>
       <div className="about-split">
         <div className="about-prose">
           {copy.paragraphs.map((paragraph, index) => (

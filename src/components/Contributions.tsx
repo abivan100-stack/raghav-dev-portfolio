@@ -58,6 +58,13 @@ export function Contributions() {
     return () => observer.disconnect();
   }, [calendar, compact]);
 
+  // The section mounts after its fetch, too late for the shell's initial hash scroll.
+  useEffect(() => {
+    if (calendar && window.location.hash === "#contributions") {
+      document.getElementById("contributions")?.scrollIntoView({ block: "start", behavior: "instant" });
+    }
+  }, [calendar]);
+
   if (!calendar) return null;
 
   // Small screens show the most recent ~6 months so the cells stay legible;
@@ -84,7 +91,7 @@ export function Contributions() {
   });
 
   return (
-    <Section id="contributions" title={copy.title} variant="activity">
+    <Section id="contributions" title={copy.title}>
       <p className="contribution-summary">
         <span className="contribution-total">{total}</span> public contributions in {rangeLabel}.
       </p>

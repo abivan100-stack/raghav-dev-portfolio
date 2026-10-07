@@ -7,11 +7,6 @@ interface SectionProps {
   id: string;
   title: string;
   lead?: string;
-  /**
-   * Composition hook. Each variant gets its own `section--<variant>` class so a
-   * section can be styled on its own; the markup stays identical.
-   */
-  variant?: "default" | "index" | "record" | "prose" | "board" | "closing" | "activity";
   children: ReactNode;
 }
 
@@ -19,10 +14,10 @@ interface SectionProps {
  * Section shell: a heading block and a body, to the right of the tape lane.
  * The heading carries `data-station`, so the tape gets a station beside it.
  */
-export function Section({ id, title, lead, variant = "default", children }: SectionProps) {
+export function Section({ id, title, lead, children }: SectionProps) {
   const headingId = `${id}-title`;
   return (
-    <section className={`section section--${variant}`} id={id} aria-labelledby={headingId}>
+    <section className="section" id={id} aria-labelledby={headingId}>
       <div className="container lane-pad">
         <header className="section-head">
           <h2 id={headingId} data-station>

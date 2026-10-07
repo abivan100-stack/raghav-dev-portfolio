@@ -10,7 +10,7 @@ import { Section } from "./ui";
 export function ProjectIndex() {
   const copy = SECTION_COPY.projects;
   return (
-    <Section id="projects" title={copy.title} lead={copy.lead} variant="index">
+    <Section id="projects" title={copy.title} lead={copy.lead}>
       <ol className="index-list">
         {PROJECTS.map((project) => (
           <li key={project.slug} className="index-item">

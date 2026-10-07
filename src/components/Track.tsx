@@ -11,6 +11,10 @@ interface Layout {
 
 const DESKTOP = { lane: 112, amp: 30, wave: 560, scale: 1 };
 const COMPACT = { lane: 56, amp: 9, wave: 380, scale: 0.78 };
+type Geometry = typeof DESKTOP;
+/** Horizontal centre of the tape at page-height `y`, a sine measured from the start box. */
+const laneX = ({ lane, amp, wave }: Geometry, y: number, startY: number) =>
+  lane / 2 + amp * Math.sin(((y - startY) / wave) * TAU);
 const STATION = 26;
 /** A station marking an element's top edge sits this far below it, level with a heading. */
 const ENTRY_STATION_OFFSET = 56;
@@ -45,7 +49,8 @@ const sameLayout = (a: Layout | null, b: Layout | null) => JSON.stringify(a) ===
  */
 export function Track() {
   const compact = useMediaQuery("(max-width: 640px)");
-  const { lane, amp, wave, scale } = compact ? COMPACT : DESKTOP;
+  const geo = compact ? COMPACT : DESKTOP;
+  const { lane, amp, wave, scale } = geo;
   const rootRef = useRef<HTMLDivElement | null>(null);
   const robotRef = useRef<SVGGElement | null>(null);
   const stationRefs = useRef<(SVGRectElement | null)[]>([]);
@@ -69,11 +74,10 @@ export function Track() {
     const robot = robotRef.current;
     if (!layout || !robot) return;
     const { startY, endY, stations } = layout;
-    const laneX = (y: number) => lane / 2 + amp * Math.sin(((y - startY) / wave) * TAU);
     const slope = (y: number) => ((amp * TAU) / wave) * Math.cos(((y - startY) / wave) * TAU);
     const place = (y: number, moving: boolean) => {
       const angle = (-Math.atan(slope(y)) * 180) / Math.PI;
-      robot.setAttribute("transform", `translate(${laneX(y)} ${y}) rotate(${angle}) scale(${scale})`);
+      robot.setAttribute("transform", `translate(${laneX(geo, y, startY)} ${y}) rotate(${angle}) scale(${scale})`);
       robot.classList.toggle("is-moving", moving);
       stationRefs.current.forEach((el, i) => el?.classList.toggle("is-passed", y >= (stations[i] ?? Infinity) - 2));
     };
@@ -133,13 +137,12 @@ export function Track() {
       window.removeEventListener("resize", wake);
       cancelAnimationFrame(frame);
     };
-  }, [layout, lane, amp, wave, scale]);
+  }, [layout, geo]);
 
   let tape = "";
   if (layout) {
     for (let y = layout.startY; y <= layout.endY; y += 6) {
-      const x = lane / 2 + amp * Math.sin(((y - layout.startY) / wave) * TAU);
-      tape += `${tape ? "L" : "M"}${x.toFixed(1)} ${y} `;
+      tape += `${tape ? "L" : "M"}${laneX(geo, y, layout.startY).toFixed(1)} ${y} `;
     }
   }
 
@@ -161,7 +164,7 @@ export function Track() {
                 stationRefs.current[i] = el;
               }}
               className="station"
-              x={lane / 2 + amp * Math.sin(((y - layout.startY) / wave) * TAU) - STATION / 2}
+              x={laneX(geo, y, layout.startY) - STATION / 2}
               y={y - STATION / 2}
               width={STATION}
               height={STATION}

@@ -2,18 +2,21 @@ import type { Project, SignalStep, TechMention } from "../data/content";
 import { PROJECT_SPEC_LABELS } from "../data/content";
 import { Tip } from "./ui";
 
+/** "CRASH (Chennai Road Accident Safety Hub)" -> "CRASH". */
+export const shortName = (name: string) => name.split(" (")[0];
+
 /**
  * A name with an aside, "CRASH (Chennai Road Accident Safety Hub)", sets the
  * short name large and the aside small beneath it. The text still reads as one
  * name to a screen reader.
  */
 export function ProjectName({ name }: { name: string }) {
-  const at = name.indexOf(" (");
-  if (at < 0) return <>{name}</>;
+  const main = shortName(name);
+  if (main === name) return <>{name}</>;
   return (
     <>
-      <span className="name-main">{name.slice(0, at)}</span>{" "}
-      <span className="name-aside">{name.slice(at + 1)}</span>
+      <span className="name-main">{main}</span>{" "}
+      <span className="name-aside">{name.slice(main.length + 1)}</span>
     </>
   );
 }

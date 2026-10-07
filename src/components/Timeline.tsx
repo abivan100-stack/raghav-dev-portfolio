@@ -1,12 +1,11 @@
 import { PROJECTS, PROJECTS_PAGE_PATH, SECTION_COPY, TIMELINE } from "../data/content";
+import { shortName } from "./ProjectCard";
 import { Section } from "./ui";
 
 // TIMELINE names a build in its short form ("CRASH"), while a project name may
-// carry a parenthetical aside ("CRASH (Chennai Road Accident Safety Hub)").
-// Match on the short form so a year's build links to its project-page entry.
-const BUILD_SLUGS = new Map(
-  PROJECTS.map((project) => [project.name.split(" (")[0], project.slug] as const),
-);
+// carry a parenthetical aside. Match on the short form so a year's build links
+// to its project-page entry.
+const BUILD_SLUGS = new Map(PROJECTS.map((project) => [shortName(project.name), project.slug] as const));
 
 /**
  * The record. A real `<table>`: year, event, venue, result. The year is set at
@@ -21,7 +20,7 @@ const BUILD_SLUGS = new Map(
 export function Timeline() {
   const copy = SECTION_COPY.timeline;
   return (
-    <Section id="timeline" title={copy.title} variant="record">
+    <Section id="timeline" title={copy.title}>
       <div className="record-scroll">
         <table className="record-table" role="table">
           <caption className="visually-hidden">

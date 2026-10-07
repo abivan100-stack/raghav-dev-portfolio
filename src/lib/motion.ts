@@ -16,14 +16,14 @@ export const PRESS_DURATION = 0.12;
 export const ROBOT_STIFFNESS = 90;
 
 /** Spread onto a motion element for the hero entrance (plays on mount). */
-export function entrance(index = 0, baseDelay = 0.05) {
+export function entrance(index = 0) {
   return {
     initial: { opacity: 0, y: RISE_PX },
     animate: { opacity: 1, y: 0 },
     transition: {
       duration: 0.4,
       ease: EASE,
-      delay: baseDelay + index * 0.05,
+      delay: 0.05 + index * 0.05,
     } satisfies Transition,
   };
 }

@@ -59,7 +59,6 @@ export function Hero() {
           ) : null}
         </m.div>
         <m.div {...entrance(3)} className="hero-person">
-          {/* PROFILE PHOTO: swap src for assets/profile.jpg to use a real photograph. */}
           <img
             className="profile-img"
             src={GITHUB_AVATAR_URL}
